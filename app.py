@@ -64,12 +64,17 @@ else:
 
     st.write("---")
     
-    if st.button("Calculate Diagnostic Risk Inference", type="primary"):
-        # Filter columns to only include those selected during training
+  if st.button("Calculate Diagnostic Risk Inference", type="primary"):
+        # 1. Isolate the features chosen by SelectKBest
         final_app_features = input_df[selected_features]
         
-        prediction = model.predict(final_app_features)[0]
-        probabilities = model.predict_proba(final_app_features)[0]
+        # 2. 🔥 THE ULTIMATE FIX: Strip away names and pass pure numbers
+        # This converts the data to a raw matrix so names cannot cause errors!
+        pure_numbers = final_app_features.to_numpy()
+        
+        # 3. Safe prediction execution using the numbers matrix
+        prediction = model.predict(pure_numbers)[0]
+        probabilities = model.predict_proba(pure_numbers)[0]
 
         st.subheader("🎯 Classification Decision Output")
         if prediction == 1:
