@@ -64,12 +64,12 @@ else:
 
     st.write("---")
     
-  if st.button("Calculate Diagnostic Risk Inference", type="primary"):
+    # 🚨 EVERYTHING BELOW HERE IS NOW PERFECTLY ALIGNED 🚨
+    if st.button("Calculate Diagnostic Risk Inference", type="primary"):
         # 1. Isolate the features chosen by SelectKBest
         final_app_features = input_df[selected_features]
         
-        # 2. 🔥 THE ULTIMATE FIX: Strip away names and pass pure numbers
-        # This converts the data to a raw matrix so names cannot cause errors!
+        # 2. Strip away names and pass pure numbers matrix
         pure_numbers = final_app_features.to_numpy()
         
         # 3. Safe prediction execution using the numbers matrix
@@ -82,4 +82,4 @@ else:
             st.info(f"Model Confidence Score: {probabilities[1]*100:.2f}% probability of readmission.")
         else:
             st.success(f"✅ **Low Risk: Patient is unlikely to be readmitted within 30 days.**")
-            st.info(f"Model Confidence Score: {probabilities[0]*100:.2f}% probability of staying healthy.")
+            st.info(f"Model Confidence Score: {probabilities[0]*100:.2f}% probability of staying healthy.")ilities[0]*100:.2f}% probability of staying healthy.")
